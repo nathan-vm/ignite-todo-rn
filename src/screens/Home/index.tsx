@@ -45,6 +45,18 @@ export function Home() {
     ])
   }, [setTasks])
 
+  const handleSetDoneTask = useCallback((index:number)=>{
+    setTasks(tasks.map((item,i)=>{
+      if(i===index) {
+        return {
+          ...item,
+          done: !item.done
+        }
+      }
+      return item
+    }))
+  },[tasks])
+
   return (
     <>
       <Header />
@@ -95,16 +107,8 @@ export function Home() {
               key={item.name} 
               done={item.done} 
               task={item.name} 
-              delete={() => {setTasks(tasks.filter((_,i)=>i!==index))}} 
-              setDone={() => {setTasks(tasks.map((item,i)=>{
-                if(i===index) {
-                  return {
-                    ...item,
-                    done: !item.done
-                  }
-                }
-                return item
-              }))}} 
+              delete={() => handleRemoveTask(item.name)} 
+              setDone={() => handleSetDoneTask(index)} 
             />
           )}
           showsVerticalScrollIndicator={false}

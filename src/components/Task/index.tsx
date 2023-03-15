@@ -23,20 +23,6 @@ export function Task(props: Props) {
     return props.done ? style.text : {}
   }, [props.done])
 
-  const alertDelete = useCallback(()=>{
-    Alert.alert("Deletar","Tem certeza ?",[
-      {
-        onPress: props.delete,
-        text: "Sim",
-        style: "destructive",
-      },
-      {
-        text: "Não",
-        style: "cancel",
-      },
-    ])
-  },[props.delete])
-
   return (
     <View
       style={styles.container}
@@ -56,7 +42,7 @@ export function Task(props: Props) {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.trash}
-        onPress={alertDelete}
+        onPress={props.delete}
       >
         <Icon
           size={20}
